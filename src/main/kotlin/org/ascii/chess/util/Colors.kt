@@ -8,6 +8,8 @@ enum class Colors(val color: String) {
     PURPLE("\u001b[0;35m"),  // PURPLE
     CYAN("\u001b[0;36m"),  // CYAN
     WHITE("\u001b[0;97m"),  // WHITE
-    CYAN_BRIGHT("\u001b[0;96m"), MAGENTA("\u001B[35m"), ORANGE("\u001b[38;5;208m")
+    CYAN_BRIGHT("\u001b[0;96m"),
+    MAGENTA("\u001B[35m"),
+    ORANGE("\u001b[38;5;208m")
 
 }

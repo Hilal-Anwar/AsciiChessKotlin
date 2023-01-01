@@ -27,44 +27,44 @@ open class Game : Display(), Movements {
     }
 
     private fun init() {
-        val c_w: Colors = Colors.CYAN_BRIGHT
-        val c_b: Colors = Colors.YELLOW
+        val cW: Colors = Colors.CYAN_BRIGHT
+        val cB: Colors = Colors.YELLOW
         board = chessBoard.chessBoard
         //all the black pieces
-        board!![0]!![0] = ChessBox(ChessToken(ChessPieceType.ROOK, c_b, Players.BLACK), false)
-        board!![0]!![1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, c_b, Players.BLACK), false)
-        board!![0]!![2] = ChessBox(ChessToken(ChessPieceType.BISHOP, c_b, Players.BLACK), false)
-        board!![0]!![3] = ChessBox(ChessToken(ChessPieceType.QUEEN, c_b, Players.BLACK), false)
-        board!![0]!![4] = ChessBox(ChessToken(ChessPieceType.KING, c_b, Players.BLACK), false)
-        board!![0]!![5] = ChessBox(ChessToken(ChessPieceType.BISHOP, c_b, Players.BLACK), false)
-        board!![0]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, c_b, Players.BLACK), false)
-        board!![0]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, c_b, Players.BLACK), false)
-        board!![1]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
-        board!![1]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, c_b, Players.BLACK), false)
+        board!![0][0] = ChessBox(ChessToken(ChessPieceType.ROOK, cB, Players.BLACK), false)
+        board!![0][1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cB, Players.BLACK), false)
+        board!![0][2] = ChessBox(ChessToken(ChessPieceType.BISHOP, cB, Players.BLACK), false)
+        board!![0][3] = ChessBox(ChessToken(ChessPieceType.QUEEN, cB, Players.BLACK), false)
+        board!![0][4] = ChessBox(ChessToken(ChessPieceType.KING, cB, Players.BLACK), false)
+        board!![0][5] = ChessBox(ChessToken(ChessPieceType.BISHOP, cB, Players.BLACK), false)
+        board!![0]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cB, Players.BLACK), false)
+        board!![0]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, cB, Players.BLACK), false)
+        board!![1]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
 
         // all the white pieces
-        board!![7]!![0] = ChessBox(ChessToken(ChessPieceType.ROOK, c_w, Players.WHITE), false)
-        board!![7]!![1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, c_w, Players.WHITE), false)
-        board!![7]!![2] = ChessBox(ChessToken(ChessPieceType.BISHOP, c_w, Players.WHITE), false)
-        board!![7]!![3] = ChessBox(ChessToken(ChessPieceType.QUEEN, c_w, Players.WHITE), false)
-        board!![7]!![4] = ChessBox(ChessToken(ChessPieceType.KING, c_w, Players.WHITE), false)
-        board!![7]!![5] = ChessBox(ChessToken(ChessPieceType.BISHOP, c_w, Players.WHITE), false)
-        board!![7]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, c_w, Players.WHITE), false)
-        board!![7]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, c_w, Players.WHITE), false)
-        board!![6]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
-        board!![6]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, c_w, Players.WHITE), false)
+        board!![7]!![0] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
+        board!![7]!![1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
+        board!![7]!![2] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
+        board!![7]!![3] = ChessBox(ChessToken(ChessPieceType.QUEEN, cW, Players.WHITE), false)
+        board!![7]!![4] = ChessBox(ChessToken(ChessPieceType.KING, cW, Players.WHITE), false)
+        board!![7]!![5] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
+        board!![7]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
+        board!![7]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
+        board!![6]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
         for (i in 2..5) {
             for (j in 0..7) {
                 board!![i]!![j] = ChessBox(null, false)
@@ -75,21 +75,21 @@ open class Game : Display(), Movements {
     @Throws(InterruptedException::class)
     fun start() {
         val keyBoardInput = KeyBoardInput(this)
-        clear_display()
+        clearDisplay()
         chessBoard.draw(message)
         while (true) {
             val key = keyBoardInput.keyBoardKey
             when (key) {
-                Key.UP -> chessBoard.move_cursor_up()
-                Key.DOWN -> chessBoard.move_cursor_down()
-                Key.RIGHT -> chessBoard.move_cursor_right()
-                Key.LEFT -> chessBoard.move_cursor_left()
+                Key.UP -> chessBoard.moveCursorUp()
+                Key.DOWN -> chessBoard.moveCursorDown()
+                Key.RIGHT -> chessBoard.moveCursorRight()
+                Key.LEFT -> chessBoard.moveCursorLeft()
                 Key.ENTER -> moves()
                 Key.ESC -> exitProcess(-1)
                 else -> {}
             }
             if (!key.equals(Key.NONE)) {
-                clear_display()
+                clearDisplay()
                 chessBoard.draw(message)
             }
             keyBoardInput.keyBoardKey = (Key.NONE)
@@ -105,12 +105,12 @@ open class Game : Display(), Movements {
             if (chess_box?.chessToken != null && selected_box == null) {
                 val chess_piece_type = chess_box.chessToken!!.chessPieceType
                 possible_position = when (chess_piece_type) {
-                    ChessPieceType.KING -> king_movement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.QUEEN -> queen_movement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.BISHOP -> bishop_movement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.ROOK -> rook_movement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.KNIGHT -> knight_movement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.PAWN -> pawn_movement(
+                    ChessPieceType.KING -> kingMovement(x, y, chess_box?.chessToken?.piece)
+                    ChessPieceType.QUEEN -> queenMovement(x, y, chess_box?.chessToken?.piece)
+                    ChessPieceType.BISHOP -> bishopMovement(x, y, chess_box?.chessToken?.piece)
+                    ChessPieceType.ROOK -> rookMovement(x, y, chess_box?.chessToken?.piece)
+                    ChessPieceType.KNIGHT -> knightMovement(x, y, chess_box?.chessToken?.piece)
+                    ChessPieceType.PAWN -> pawnMovement(
                         x, y, chess_box?.chessToken,
                         chess_box?.chessToken?.piece
                     )
@@ -256,7 +256,7 @@ open class Game : Display(), Movements {
         return enPassant.size > 0 && Arrays.equals(z, enPassant)
     }
 
-    override fun rook_movement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
+    override fun rookMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
         var degree_f = 4
         val freedom = arrayOf<IntArray?>(intArrayOf(0, 1), intArrayOf(0, -1), intArrayOf(1, 0), intArrayOf(-1, 0))
         val movement = arrayOf(intArrayOf(x, y), intArrayOf(x, y), intArrayOf(x, y), intArrayOf(x, y))
@@ -296,7 +296,7 @@ open class Game : Display(), Movements {
                 !color!!.equals(board!![y]!![x]?.chessToken!!.piece)
     }
 
-    override fun bishop_movement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
+    override fun bishopMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
         var degree_f = 4
         val freedom = arrayOf<IntArray?>(intArrayOf(1, 1), intArrayOf(-1, 1), intArrayOf(1, -1), intArrayOf(-1, -1))
         val movement = arrayOf(intArrayOf(x, y), intArrayOf(x, y), intArrayOf(x, y), intArrayOf(x, y))
@@ -327,7 +327,7 @@ open class Game : Display(), Movements {
         return list
     }
 
-    override fun knight_movement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
+    override fun knightMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
         val freedom = arrayOf(
             intArrayOf(1, 2),
             intArrayOf(-1, 2),
@@ -383,7 +383,7 @@ open class Game : Display(), Movements {
         return false;
     }
 
-    override fun queen_movement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
+    override fun queenMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
         var degree_f = 8
         val freedom = arrayOf<IntArray?>(
             intArrayOf(0, 1),
@@ -432,7 +432,7 @@ open class Game : Display(), Movements {
         return list
     }
 
-    override fun king_movement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
+    override fun kingMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
         val freedom = arrayOf(
             intArrayOf(0, 1),
             intArrayOf(0, -1),
@@ -508,7 +508,7 @@ open class Game : Display(), Movements {
         return list
     }
 
-    override fun pawn_movement(x: Int, y: Int, chessToken: ChessToken?, color: Players?): ArrayList<IntArray> {
+    override fun pawnMovement(x: Int, y: Int, chessToken: ChessToken?, color: Players?): ArrayList<IntArray> {
         val freedom: Array<IntArray>
         val list = ArrayList<IntArray>()
         val w = arrayOf(intArrayOf(0, -1), intArrayOf(1, -1), intArrayOf(-1, -1))

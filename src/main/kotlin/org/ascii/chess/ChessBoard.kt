@@ -4,8 +4,6 @@ import org.ascii.chess.util.Cursor
 import org.ascii.chess.util.Text
 
 class ChessBoard(cursor: Cursor) : Cursor(cursor.column, cursor.row, cursor.colors) {
-    val width = 16
-    val height = 16
     val chessBoard = Array(8) { arrayOfNulls<ChessBox>(8) }
     fun draw(message: String?) {
         val a = arrayOf("╤", "═══", "╔", "╗")
@@ -16,21 +14,29 @@ class ChessBoard(cursor: Cursor) : Cursor(cursor.column, cursor.row, cursor.colo
         for (i in 0..16) {
             for (j in 0..16) {
                 if (i == 0) {
-                    if (j == 0) chess.append(getText(i, j, a[2])) else if (j == 16) chess.append(
-                        getText(
-                            i,
-                            j,
-                            a[3]
+                    when (j) {
+                        0 -> chess.append(getText(i, j, a[2]))
+                        16 -> chess.append(
+                            getText(
+                                i,
+                                j,
+                                a[3]
+                            )
                         )
-                    ) else chess.append(getText(i, j, a[j % 2]))
+                        else -> chess.append(getText(i, j, a[j % 2]))
+                    }
                 } else if (i == 16) {
-                    if (j == 0) chess.append(getText(i, j, d[2])) else if (j == 16) chess.append(
-                        getText(
-                            i,
-                            j,
-                            d[3]
+                    when (j) {
+                        0 -> chess.append(getText(i, j, d[2]))
+                        16 -> chess.append(
+                            getText(
+                                i,
+                                j,
+                                d[3]
+                            )
                         )
-                    ) else chess.append(getText(i, j, d[j % 2]))
+                        else -> chess.append(getText(i, j, d[j % 2]))
+                    }
                 } else if (i % 2 != 0) {
                     if (j == 0 || j == 16) chess.append(getText(i, j, b[2])) else {
                         if (j % 2 != 0 && chessBoard[i / 2][j / 2] != null && chessBoard[i / 2][j / 2]?.chessToken != null) {
@@ -41,13 +47,17 @@ class ChessBoard(cursor: Cursor) : Cursor(cursor.column, cursor.row, cursor.colo
                         if (j % 2 == 0) b[1] = if (b[1] == "   ") " ░ " else "   "
                     }
                 } else {
-                    if (j == 0) chess.append(getText(i, j, c[2])) else if (j == 16) chess.append(
-                        getText(
-                            i,
-                            j,
-                            c[3]
+                    when (j) {
+                        0 -> chess.append(getText(i, j, c[2]))
+                        16 -> chess.append(
+                            getText(
+                                i,
+                                j,
+                                c[3]
+                            )
                         )
-                    ) else chess.append(getText(i, j, c[j % 2]))
+                        else -> chess.append(getText(i, j, c[j % 2]))
+                    }
                 }
             }
             chess.append("\n")

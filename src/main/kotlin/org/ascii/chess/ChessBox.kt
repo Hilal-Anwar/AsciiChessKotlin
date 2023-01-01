@@ -9,7 +9,4 @@ class ChessBox(var chessToken: ChessToken?, var isSelected: Boolean) {
         this.color = colors
     }
 
-    fun getColors(): Colors {
-        return color
-    }
 }

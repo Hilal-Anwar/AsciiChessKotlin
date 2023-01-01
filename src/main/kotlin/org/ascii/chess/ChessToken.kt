@@ -7,7 +7,6 @@ import org.ascii.chess.util.Text
 class ChessToken(val chessPieceType: ChessPieceType, color: Colors, players: Players) {
     private var players: Players
     private var color: Colors
-    var noOfMoves = 0
     var piece: Players
         get() = players
         set(players) {

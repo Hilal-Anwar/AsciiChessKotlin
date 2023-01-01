@@ -15,7 +15,7 @@ open class Display protected constructor() {
         }
     }
 
-    protected fun clear_display() {
+    protected fun clearDisplay() {
         println("\u001b[H\u001b[J")
     }
 }
