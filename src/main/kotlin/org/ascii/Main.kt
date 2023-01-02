@@ -6,7 +6,7 @@ import org.jline.utils.InfoCmp
 import java.io.IOException
 
 object Main {
-    var TITLE = """
+    private var TITLE = """
                         
             ░█████╗░░██████╗░█████╗░██╗██╗  ░█████╗░██╗░░██╗███████╗░██████╗░██████╗
             ██╔══██╗██╔════╝██╔══██╗██║██║  ██╔══██╗██║░░██║██╔════╝██╔════╝██╔════╝
@@ -15,7 +15,7 @@ object Main {
             ██║░░██║██████╔╝╚█████╔╝██║██║  ╚█████╔╝██║░░██║███████╗██████╔╝██████╔╝
             ╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝╚═╝  ░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░╚═════╝░
             
-            """.trimIndent()
+            """
 
     @Throws(InterruptedException::class)
     @JvmStatic
@@ -23,6 +23,7 @@ object Main {
         loading(StringBuilder("=>"))
         val game = Game()
         game.start()
+
     }
 
     @Throws(InterruptedException::class)
@@ -31,9 +32,9 @@ object Main {
             TerminalBuilder.terminal().use { terminal ->
                 while (s.length <= 80) {
                     terminal.puts(InfoCmp.Capability.clear_screen)
-                    println(TITLE.indent(30))
+                    println(TITLE.indentN(30))
                     s.insert(0, "=")
-                    println(s.toString().indent(25))
+                    println(s.toString().indentN(25))
                     Thread.sleep(16)
                 }
             }
@@ -41,4 +42,9 @@ object Main {
             throw RuntimeException(e)
         }
     }
+
+    private fun String.indentN(n: Int): String {
+        return ((" ".repeat(n))+this)
+    }
+
 }

@@ -12,21 +12,17 @@ open class Game : Display(), Movements {
      */
     private val chessBoard = ChessBoard(Cursor(4, 6, Colors.MAGENTA))
     private var board: Array<Array<ChessBox?>>? = null
-    private var possible_position = ArrayList<IntArray>()
-    private var selected_box: IntArray? = null
+    private var possiblePosition = ArrayList<IntArray>()
+    private var selectedBox: IntArray? = null
     private var turn: Players = Players.WHITE
     private var message = ""
     private val isKingChecked = false
-    private var isCastlingValid_Black = true
-    private var isCastlingValid_White = true
+    private var castlingvalidBlack = true
+    private var castlingvalidWhite = true
     private var enPassant = intArrayOf()
     private var castling = ArrayList<IntArray>(2)
 
     init {
-        init()
-    }
-
-    private fun init() {
         val cW: Colors = Colors.CYAN_BRIGHT
         val cB: Colors = Colors.YELLOW
         board = chessBoard.chessBoard
@@ -37,37 +33,37 @@ open class Game : Display(), Movements {
         board!![0][3] = ChessBox(ChessToken(ChessPieceType.QUEEN, cB, Players.BLACK), false)
         board!![0][4] = ChessBox(ChessToken(ChessPieceType.KING, cB, Players.BLACK), false)
         board!![0][5] = ChessBox(ChessToken(ChessPieceType.BISHOP, cB, Players.BLACK), false)
-        board!![0]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cB, Players.BLACK), false)
-        board!![0]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, cB, Players.BLACK), false)
-        board!![1]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
-        board!![1]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![0][6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cB, Players.BLACK), false)
+        board!![0][7] = ChessBox(ChessToken(ChessPieceType.ROOK, cB, Players.BLACK), false)
+        board!![1][0] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][1] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][2] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][3] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][4] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][5] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][6] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
+        board!![1][7] = ChessBox(ChessToken(ChessPieceType.PAWN, cB, Players.BLACK), false)
 
         // all the white pieces
-        board!![7]!![0] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
-        board!![7]!![1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
-        board!![7]!![2] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
-        board!![7]!![3] = ChessBox(ChessToken(ChessPieceType.QUEEN, cW, Players.WHITE), false)
-        board!![7]!![4] = ChessBox(ChessToken(ChessPieceType.KING, cW, Players.WHITE), false)
-        board!![7]!![5] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
-        board!![7]!![6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
-        board!![7]!![7] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
-        board!![6]!![0] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![1] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![2] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![3] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![4] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![5] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![6] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
-        board!![6]!![7] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![7][0] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
+        board!![7][1] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
+        board!![7][2] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
+        board!![7][3] = ChessBox(ChessToken(ChessPieceType.QUEEN, cW, Players.WHITE), false)
+        board!![7][4] = ChessBox(ChessToken(ChessPieceType.KING, cW, Players.WHITE), false)
+        board!![7][5] = ChessBox(ChessToken(ChessPieceType.BISHOP, cW, Players.WHITE), false)
+        board!![7][6] = ChessBox(ChessToken(ChessPieceType.KNIGHT, cW, Players.WHITE), false)
+        board!![7][7] = ChessBox(ChessToken(ChessPieceType.ROOK, cW, Players.WHITE), false)
+        board!![6][0] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][1] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][2] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][3] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][4] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][5] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][6] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
+        board!![6][7] = ChessBox(ChessToken(ChessPieceType.PAWN, cW, Players.WHITE), false)
         for (i in 2..5) {
             for (j in 0..7) {
-                board!![i]!![j] = ChessBox(null, false)
+                board!![i][j] = ChessBox(null, false)
             }
         }
     }
@@ -88,7 +84,7 @@ open class Game : Display(), Movements {
                 Key.ESC -> exitProcess(-1)
                 else -> {}
             }
-            if (!key.equals(Key.NONE)) {
+            if (key != Key.NONE) {
                 clearDisplay()
                 chessBoard.draw(message)
             }
@@ -100,48 +96,48 @@ open class Game : Display(), Movements {
     private fun moves() {
         val x: Int = chessBoard.column
         val y: Int = chessBoard.row
-        val chess_box = board!![y]!![x]
-        if (turn.isEqual(chess_box) || selected_box != null) {
-            if (chess_box?.chessToken != null && selected_box == null) {
-                val chess_piece_type = chess_box.chessToken!!.chessPieceType
-                possible_position = when (chess_piece_type) {
-                    ChessPieceType.KING -> kingMovement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.QUEEN -> queenMovement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.BISHOP -> bishopMovement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.ROOK -> rookMovement(x, y, chess_box?.chessToken?.piece)
-                    ChessPieceType.KNIGHT -> knightMovement(x, y, chess_box?.chessToken?.piece)
+        val chessBox = board!![y][x]
+        if (turn.isEqual(chessBox) || selectedBox != null) {
+            if (chessBox?.chessToken != null && selectedBox == null) {
+                val chessPieceType = chessBox.chessToken!!.chessPieceType
+                possiblePosition = when (chessPieceType) {
+                    ChessPieceType.KING -> kingMovement(x, y, chessBox.chessToken?.piece)
+                    ChessPieceType.QUEEN -> queenMovement(x, y, chessBox.chessToken?.piece)
+                    ChessPieceType.BISHOP -> bishopMovement(x, y, chessBox.chessToken?.piece)
+                    ChessPieceType.ROOK -> rookMovement(x, y, chessBox.chessToken?.piece)
+                    ChessPieceType.KNIGHT -> knightMovement(x, y, chessBox.chessToken?.piece)
                     ChessPieceType.PAWN -> pawnMovement(
-                        x, y, chess_box?.chessToken,
-                        chess_box?.chessToken?.piece
+                        x, y, chessBox.chessToken,
+                        chessBox.chessToken?.piece
                     )
                 }
-                if (possible_position.size != 0) {
-                    for (sl in possible_position) {
-                        board!![sl[1]]!![sl[0]]?.setSelected(
+                if (possiblePosition.size != 0) {
+                    for (sl in possiblePosition) {
+                        board!![sl[1]][sl[0]]?.setSelected(
                             true,
-                            if (board!![sl[1]]!![sl[0]]?.chessToken != null) Colors.RED else Colors.GREEN
+                            if (board!![sl[1]][sl[0]]?.chessToken != null) Colors.RED else Colors.GREEN
                         )
                     }
-                    selected_box = intArrayOf(x, y)
-                    if (board!![y]!![x]?.chessToken != null) {
-                        if (!board!![y]!![x]!!.isSelected) board!![y]!![x]!!.setSelected(true, Colors.BLUE)
+                    selectedBox = intArrayOf(x, y)
+                    if (board!![y][x]?.chessToken != null) {
+                        if (!board!![y][x]!!.isSelected) board!![y][x]!!.setSelected(true, Colors.BLUE)
                     }
                 }
-            } else if (selected_box != null) {
+            } else if (selectedBox != null) {
                 if (ifAnyMatching(x, y)) {
-                    val _x = selected_box!![0]
-                    val _y = selected_box!![1]
-                    if (y == 0 && board!![_y]!![_x]?.chessToken?.piece!!.equals(Players.WHITE) &&
-                        board!![_y]!![_x]?.chessToken?.chessPieceType == ChessPieceType.PAWN
-                    ) board!![y]!![x] =
+                    val _x = selectedBox!![0]
+                    val _y = selectedBox!![1]
+                    if (y == 0 && board!![_y][_x]?.chessToken?.piece!! == Players.WHITE &&
+                        board!![_y][_x]?.chessToken?.chessPieceType == ChessPieceType.PAWN
+                    ) board!![y][x] =
                         ChessBox(
                             ChessToken(
                                 ChessPieceType.QUEEN,
                                 Colors.CYAN_BRIGHT, Players.WHITE
                             ), false
-                        ) else if (y == 7 && board!![_y]!![_x]?.chessToken?.piece!!.equals(Players.BLACK) &&
-                        board!![_y]!![_x]?.chessToken?.chessPieceType == ChessPieceType.PAWN
-                    ) board!![y]!![x] =
+                        ) else if (y == 7 && board!![_y][_x]?.chessToken?.piece!! == Players.BLACK &&
+                        board!![_y][_x]?.chessToken?.chessPieceType == ChessPieceType.PAWN
+                    ) board!![y][x] =
                         ChessBox(
                             ChessToken(
                                 ChessPieceType.QUEEN,
@@ -149,103 +145,95 @@ open class Game : Display(), Movements {
                             ), false
                         ) else if (isEnPassant(y, 3, _y, _x, x, y)) {
                         enPassant = intArrayOf(x, y - 1)
-                        board!![y]!![x] = board!![_y]!![_x]
+                        board!![y][x] = board!![_y][_x]
                     } else if (isEnPassant(y, 4, _y, _x, x, y)) {
                         enPassant = intArrayOf(x, y + 1)
-                        board!![y]!![x] = board!![_y]!![_x]
+                        board!![y][x] = board!![_y][_x]
                     } else if (castling.size > 0 && castling[0][0] == x && castling[0][1] == y ||
                         castling.size > 1 && castling[1][0] == x && castling[1][1] == y
                     ) {
-                        val pi = board!![_y]!![_x]?.chessToken!!.piece
-                        if (pi.equals(Players.BLACK) && isCastlingValid_Black) {
-                            board!![y]!![x] = board!![_y]!![_x]
+                        val pi = board!![_y][_x]?.chessToken!!.piece
+                        if (pi == Players.BLACK && castlingvalidBlack) {
+                            board!![y][x] = board!![_y][_x]
                             if (x < _x) {
-                                board!![y]!![x + 1] = board!![0]!![0]
-                                board!![0]!![0] = ChessBox(null, false)
+                                board!![y][x + 1] = board!![0][0]
+                                board!![0][0] = ChessBox(null, false)
                             } else if (x > _x) {
-                                board!![y]!![x - 1] = board!![0]!![7]
-                                board!![0]!![7] = ChessBox(null, false)
+                                board!![y][x - 1] = board!![0][7]
+                                board!![0][7] = ChessBox(null, false)
                             }
-                            isCastlingValid_Black = false
+                            castlingvalidBlack = false
                             castling = ArrayList()
-                        } else if (pi.equals(Players.WHITE) && isCastlingValid_White) {
-                            board!![y]!![x] = board!![_y]!![_x]
+                        } else if (pi == Players.WHITE && castlingvalidWhite) {
+                            board!![y][x] = board!![_y][_x]
                             if (x < _x) {
-                                board!![y]!![x + 1] = board!![7]!![0]
-                                board!![7]!![0] = ChessBox(null, false)
+                                board!![y][x + 1] = board!![7][0]
+                                board!![7][0] = ChessBox(null, false)
                             } else if (x > _x) {
-                                board!![y]!![x - 1] = board!![7]!![7]
-                                board!![7]!![7] = ChessBox(null, false)
+                                board!![y][x - 1] = board!![7][7]
+                                board!![7][7] = ChessBox(null, false)
                             }
-                            isCastlingValid_White = false
+                            castlingvalidWhite = false
                             castling = ArrayList()
                         }
-                    } else if (enPassant.size > 0 && enPassant[0] == x && enPassant[1] == y) {
-                        board!![enPassant[1]]!![enPassant[0]] = board!![_y]!![_x]
-                        if (board!![_y]!![_x]?.chessToken!!.piece.equals(Players.WHITE)) board!![_y]!![_x - 1] =
+                    } else if (enPassant.isNotEmpty() && enPassant[0] == x && enPassant[1] == y) {
+                        board!![enPassant[1]][enPassant[0]] = board!![_y][_x]
+                        if (board!![_y][_x]?.chessToken!!.piece == Players.WHITE) board!![_y]!![_x - 1] =
                             ChessBox(
                                 null,
                                 false
-                            ) else if (board!![_y]!![_x]?.chessToken!!.piece.equals(Players.BLACK)) {
-                            board!![_y]!![_x + 1] = ChessBox(null, false)
+                            ) else if (board!![_y][_x]?.chessToken!!.piece.equals(Players.BLACK)) {
+                            board!![_y][_x + 1] = ChessBox(null, false)
                         }
                         enPassant = intArrayOf()
-                    } else board!![y]!![x] = board!![_y]!![_x]
-                    board!![_y]!![_x] = ChessBox(null, false)
+                    } else board!![y][x] = board!![_y][_x]
+                    board!![_y][_x] = ChessBox(null, false)
                     turn = if (turn.equals(Players.WHITE)) Players.BLACK else Players.WHITE
                 }
-                board!![selected_box!![1]]!![selected_box!![0]]!!.setSelected(false, Colors.WHITE)
-                for (sl in possible_position) {
-                    board!![sl[1]]!![sl[0]]!!.setSelected(false, Colors.WHITE)
+                board!![selectedBox!![1]][selectedBox!![0]]!!.setSelected(false, Colors.WHITE)
+                for (sl in possiblePosition) {
+                    board!![sl[1]][sl[0]]!!.setSelected(false, Colors.WHITE)
                 }
-                if (enPassant.size > 0) {
-                    board!![enPassant[1]]!![enPassant[0]]!!.setSelected(false, Colors.WHITE)
+                if (enPassant.isNotEmpty()) {
+                    board!![enPassant[1]][enPassant[0]]!!.setSelected(false, Colors.WHITE)
                 }
                 for (ints in castling) {
-                    board!![ints[1]]!![ints[0]]!!.setSelected(false, Colors.WHITE)
+                    board!![ints[1]][ints[0]]!!.setSelected(false, Colors.WHITE)
                 }
-                selected_box = null
+                selectedBox = null
             }
             message = ""
-        } else if (chess_box?.chessToken != null) {
+        } else if (chessBox?.chessToken != null) {
             message = "Invalid move its," + turn.name + " turn " +
-                    chess_box?.chessToken?.piece!!.name + " cannot be moved"
+                    chessBox.chessToken?.piece!!.name + " cannot be moved"
         }
     }
 
     private fun isEnPassant(m: Int, n: Int, _y: Int, _x: Int, x: Int, y: Int): Boolean {
-        val co: Players? = board!![_y]!![_x]?.chessToken!!.piece
-        if (m == n && board!![_y]!![_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 0 &&
-            board!![_y]!![_x]?.chessToken!!.piece.equals(Players.BLACK) && board!![y]!![x - 1]?.chessToken != null &&
-            !board!![y]!![x - 1]?.chessToken!!.piece.equals(
-                co
-            )
+        val co: Players = board!![_y][_x]?.chessToken!!.piece
+        if (m == n && board!![_y][_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 0 &&
+            board!![_y][_x]?.chessToken!!.piece == Players.BLACK && board!![y][x - 1]?.chessToken != null &&
+            board!![y][x - 1]?.chessToken!!.piece != co
         ) {
             return true
-        } else if (m == n && board!![_y]!![_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 0 &&
-            board!![_y]!![_x]?.chessToken!!.piece.equals(Players.BLACK) && board!![y]!![x + 1]?.chessToken != null
-            && !board!![y]!![x + 1]?.chessToken!!.piece.equals(
-                co
-            )
+        } else if (m == n && board!![_y][_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 0 &&
+            board!![_y][_x]?.chessToken!!.piece == Players.BLACK && board!![y][x + 1]?.chessToken != null
+            && board!![y][x + 1]?.chessToken!!.piece != co
         ) {
             return true
-        } else if (m == n && board!![_y]!![_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 7 &&
-            board!![_y]!![_x]?.chessToken!!.piece.equals(Players.WHITE) && board!![y]!![x + 1]?.chessToken != null &&
-            !board!![y]!![x + 1]?.chessToken!!.piece.equals(
-                co
-            )
-        ) return true else if (m == n && board!![_y]!![_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 7 &&
-            board!![_y]!![_x]?.chessToken!!.piece.equals(Players.WHITE) && board!![y]!![x - 1]?.chessToken != null &&
-            !board!![y]!![x - 1]?.chessToken!!.piece.equals(
-                co
-            )
+        } else if (m == n && board!![_y][_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 7 &&
+            board!![_y][_x]?.chessToken!!.piece == Players.WHITE && board!![y][x + 1]?.chessToken != null &&
+            board!![y][x + 1]?.chessToken!!.piece != co
+        ) return true else if (m == n && board!![_y][_x]?.chessToken!!.chessPieceType == ChessPieceType.PAWN && x != 7 &&
+            board!![_y][_x]?.chessToken!!.piece == Players.WHITE && board!![y][x - 1]?.chessToken != null &&
+            board!![y][x - 1]?.chessToken!!.piece != co
         ) return true
         return false
     }
 
     private fun ifAnyMatching(x: Int, y: Int): Boolean {
         val z = intArrayOf(x, y)
-        for (t in possible_position) {
+        for (t in possiblePosition) {
             if (Arrays.equals(t, z)) {
                 return true
             }
@@ -288,12 +276,12 @@ open class Game : Display(), Movements {
     }
 
     private fun isValidPoint(x: Int, y: Int, color: Players?): Boolean {
-        return x >= 0 && x < 8 && y >= 0 && y < 8 && board!![y]!![x]?.chessToken == null
+        return x in 0..7 && y >= 0 && y < 8 && board!![y][x]?.chessToken == null
     }
 
     private fun isValidPointFilledPosition(x: Int, y: Int, color: Players?): Boolean {
-        return x >= 0 && x < 8 && y >= 0 && y < 8 && board!![y]!![x]?.chessToken != null &&
-                !color!!.equals(board!![y]!![x]?.chessToken!!.piece)
+        return x in 0..7 && y >= 0 && y < 8 && board!![y][x]?.chessToken != null &&
+                !color!!.equals(board!![y][x]?.chessToken!!.piece)
     }
 
     override fun bishopMovement(x: Int, y: Int, color: Players?): ArrayList<IntArray> {
@@ -362,23 +350,23 @@ open class Game : Display(), Movements {
     }
 
     private fun isValidCastling(x: Int, y: Int, players: Players, direction: String): Boolean {
-        if (players.equals(Players.BLACK)) {
-            if (direction == "left") return board!![y]!![x - 1]?.chessToken == null && board!![y]!![x - 2]?.chessToken == null && board!![y]!![x - 3]?.chessToken == null &&
-                    board!![0]!![0]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
-                    !isKingChecked && board!![0]!![0]?.chessToken?.piece!!.equals(Players.BLACK)
+        if (players == Players.BLACK) {
+            if (direction == "left") return board!![y][x - 1]?.chessToken == null && board!![y][x - 2]?.chessToken == null && board!![y][x - 3]?.chessToken == null &&
+                    board!![0][0]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
+                    !isKingChecked && board!![0][0]?.chessToken?.piece!! == Players.BLACK
             if (direction == "right") {
-                return board!![y]!![x + 1]?.chessToken == null && board!![y]!![x + 2]?.chessToken == null
-                        && board!![0]!![7]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
-                        !isKingChecked && board!![0]!![7]?.chessToken?.piece!!.equals(Players.BLACK)
+                return board!![y][x + 1]?.chessToken == null && board!![y][x + 2]?.chessToken == null
+                        && board!![0][7]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
+                        !isKingChecked && board!![0][7]?.chessToken?.piece!! == Players.BLACK
             }
-        } else if (players.equals(Players.WHITE))
-            if (direction == "left") return board!![y]!![x - 1]?.chessToken == null
-                    && board!![y]!![x - 2]?.chessToken == null && board!![y]!![x - 3]?.chessToken == null
-                    && board!![7]!![0]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
-                    !isKingChecked && board!![7]!![0]?.chessToken?.piece?.equals(Players.WHITE) ?: return if (direction == "right") {
-                board!![y]!![x + 1]?.chessToken == null && board!![y]!![x + 2]?.chessToken == null && board!![7]!![7]
+        } else if (players == Players.WHITE)
+            if (direction == "left") return board!![y][x - 1]?.chessToken == null
+                    && board!![y][x - 2]?.chessToken == null && board!![y][x - 3]?.chessToken == null
+                    && board!![7][0]?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
+                    !isKingChecked && board!![7][0]?.chessToken?.piece?.equals(Players.WHITE) ?: return if (direction == "right") {
+                board!![y][x + 1]?.chessToken == null && board!![y][x + 2]?.chessToken == null && board!![7][7]
                     ?.chessToken?.chessPieceType == ChessPieceType.ROOK &&
-                        !isKingChecked && board!![7]!![7]?.chessToken!!.piece.equals(Players.WHITE)
+                        !isKingChecked && board!![7][7]?.chessToken!!.piece.equals(Players.WHITE)
             } else false
         return false;
     }
@@ -463,8 +451,8 @@ open class Game : Display(), Movements {
                 list.add(movement[i])
             }
         }
-        if (isCastlingValid_Black || isCastlingValid_White) {
-            if (y == 0 && isCastlingValid_Black && color!!.equals(Players.BLACK) && isValidCastling(
+        if (castlingvalidBlack || castlingvalidWhite) {
+            if (y == 0 && castlingvalidBlack && color!!.equals(Players.BLACK) && isValidCastling(
                     x,
                     y,
                     color,
@@ -472,9 +460,9 @@ open class Game : Display(), Movements {
                 )
             ) {
                 castling.add(intArrayOf(x - 2, y))
-                board!![y]!![x - 2]!!.setSelected(true, Colors.ORANGE)
+                board!![y][x - 2]!!.setSelected(true, Colors.ORANGE)
             }
-            if (y == 0 && isCastlingValid_Black && color!!.equals(Players.BLACK) && isValidCastling(
+            if (y == 0 && castlingvalidBlack && color!! == Players.BLACK && isValidCastling(
                     x,
                     y,
                     color,
@@ -482,9 +470,9 @@ open class Game : Display(), Movements {
                 )
             ) {
                 castling.add(intArrayOf(x + 2, y))
-                board!![y]!![x + 2]!!.setSelected(true, Colors.ORANGE)
+                board!![y][x + 2]!!.setSelected(true, Colors.ORANGE)
             }
-            if (y == 7 && isCastlingValid_White && color!!.equals(Players.WHITE) && isValidCastling(
+            if (y == 7 && castlingvalidWhite && color!! == Players.WHITE && isValidCastling(
                     x,
                     y,
                     color,
@@ -492,9 +480,9 @@ open class Game : Display(), Movements {
                 )
             ) {
                 castling.add(intArrayOf(x - 2, y))
-                board!![y]!![x - 2]!!.setSelected(true, Colors.ORANGE)
+                board!![y][x - 2]!!.setSelected(true, Colors.ORANGE)
             }
-            if (y == 7 && isCastlingValid_White && color!!.equals(Players.WHITE) && isValidCastling(
+            if (y == 7 && castlingvalidWhite && color!! == Players.WHITE && isValidCastling(
                     x,
                     y,
                     color,
@@ -502,7 +490,7 @@ open class Game : Display(), Movements {
                 )
             ) {
                 castling.add(intArrayOf(x + 2, y))
-                board!![y]!![x + 2]!!.setSelected(true, Colors.ORANGE)
+                board!![y][x + 2]!!.setSelected(true, Colors.ORANGE)
             }
         }
         return list
@@ -538,8 +526,8 @@ open class Game : Display(), Movements {
                     }
                 }
             }
-            if (enPassant.size > 0 && (y == 3 || y == 4)) {
-                board!![enPassant[1]]!![enPassant[0]]!!.setSelected(true, Colors.ORANGE)
+            if (enPassant.isNotEmpty() && (y == 3 || y == 4)) {
+                board!![enPassant[1]][enPassant[0]]!!.setSelected(true, Colors.ORANGE)
             }
         }
         return list
